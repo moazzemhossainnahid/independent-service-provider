@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './Header.css';
 import Globe from '@iconscout/react-unicons/icons/uil-globe';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 
 import Bar from '@iconscout/react-unicons/icons/uil-bars';
 import Close from '@iconscout/react-unicons/icons/uil-arrow-down-left';
  
 const Header = () => {
+    const navigate = useNavigate();
 
     let Links = [
         {name: 'HOME', to:'/'},
@@ -36,7 +37,8 @@ const Header = () => {
                             <li key={link.name} className='md:ml-8 text-xl md:my-0 my-7'><Link className='text-gray-800 hover:text-gray-500 duration-300' to={link.to}>{link.name}</Link></li>
                         ))
                     }
-                    <Button>SignIn</Button>
+                    <div className="" onClick={() => navigate('/signin')}><Button>SignIn</Button></div>
+                    
                 </ul>
             </div>
         </nav>

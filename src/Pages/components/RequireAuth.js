@@ -6,11 +6,9 @@ const RequireAuth = ({children}) => {
     const {user, loading} = useFirebase();
     const location = useLocation();
 
-
     if(loading){
        return <Loading/>
     }
-
 
     if(!user){
        return <Navigate to='/signin' state={{from:location}} replace />

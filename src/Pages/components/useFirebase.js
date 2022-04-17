@@ -1,19 +1,27 @@
 import { signOut } from "firebase/auth";
 import { useState } from "react";
-import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import { toast } from 'react-toastify';
 
 const useFirebase = () => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [confirmPassword, setConfirmPassword] = useState('');
 
-const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
 const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
 const [signInWithGoogle] = useSignInWithGoogle(auth);
 const [signInWithGithub] = useSignInWithGithub(auth);
 const [user, loading] = useAuthState(auth);
-    
+const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+
+const navigate = useNavigate();
+const location = useLocation();
+let from = location.state?.from?.pathname || "/";
+
+
 const handleEmailInput = (event) => {
     setEmail(event.target.value);
 }
@@ -32,24 +40,44 @@ const handleSignUpForm = (event) => {
         return;
     }
     createUserWithEmailAndPassword(email, password)
+    .then( () => {
+        navigate(from, {replace:true})
+    })
 }
 
 const handleSignInForm = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(email, password)
+    .then(() => {
+        navigate(from, {replace:true})
+    })
 }
 
 const handleGoogleSignIn = () => {
-    signInWithGoogle();
+    signInWithGoogle()
+    .then(() => {
+        navigate(from, {replace:true})
+    })
 }
 
 const handleGithubSignIn = () => {
-    signInWithGithub();
+    signInWithGithub()
+    .then(() => {
+        navigate(from, {replace:true})
+    })
+    
 }
 
 const handleSignOut= () => {
     signOut(auth)
+    navigate('/')
 }
+
+const handlePasswordReset = async () => {
+    await sendPasswordResetEmail(email)
+    toast('Password Reset Email Sent')
+}
+
 
 
     return {
@@ -62,7 +90,8 @@ const handleSignOut= () => {
         handleSignInForm,
         handleGoogleSignIn,
         handleGithubSignIn,
-        handleSignOut
+        handleSignOut,
+        handlePasswordReset,
     };
 };
 

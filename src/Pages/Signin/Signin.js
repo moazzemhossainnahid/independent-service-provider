@@ -5,11 +5,12 @@ import './Signin.css';
 import google from '../../images/Google-Logo.png';
 import github from '../../images/Github-Icon.png';
 import useFirebase from '../components/useFirebase';
+import { ToastContainer } from 'react-toastify';
 
 const Signin = () => {
-  const {handleEmailInput, handlePasswordInput, handleSignInForm, handleGoogleSignIn, handleGithubSignIn} = useFirebase();
+  const {handleEmailInput, handlePasswordInput, handleSignInForm, handleGoogleSignIn, handleGithubSignIn, handlePasswordReset} = useFirebase();
     return (
-        <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm mx-auto text-left my-5">
+        <div className="block p-6 rounded-lg shadow-lg bg-indigo-300 max-w-sm mx-auto text-left my-5">
   <form onSubmit={handleSignInForm}>
     <div className="form-group mb-6">
       <label for="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Email address</label>
@@ -55,7 +56,7 @@ const Signin = () => {
           id="exampleCheck2"/>
         <label className="form-check-label inline-block text-gray-800" for="exampleCheck2">Accept Turms & Consitions</label>
       </div>
-      <a href="#!"
+      <a href="#!" onClick={handlePasswordReset}
         className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Forgot
         password?</a>
     </div>
@@ -96,7 +97,9 @@ const Signin = () => {
                 <span className="pl-2">Continue With Github</span>
             </div>
         </div>
+        <ToastContainer/>
 </div>
+
     );
 };
 

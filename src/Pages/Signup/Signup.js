@@ -11,7 +11,7 @@ const Signup = () => {
   const [checked, setChecked] = useState(false);
   return (
     <div>
-      <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm mx-auto text-left my-5">
+      <div className="block p-6 rounded-lg shadow-lg  bg-indigo-300 max-w-sm mx-auto text-left my-5">
         <form onSubmit={handleSignUpForm}>
           <div className="form-group mb-6">
             <label
@@ -110,7 +110,6 @@ const Signup = () => {
             </a>
           </div>
           <button
-          disabled
             type="submit"
             className="
             w-full

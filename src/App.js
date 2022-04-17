@@ -6,6 +6,7 @@ import RequireAuth from './Pages/components/RequireAuth';
 import Contact from './Pages/Contact/Contact';
 import Home from './Pages/Home/Home';
 import NotFound from './Pages/NotFound/NotFound';
+import ServiceDetails from './Pages/Services/ServiceDetails/ServiceDetails';
 import Services from './Pages/Services/Services';
 import Header from './Pages/SharedPages/Header/Header';
 import Signin from './Pages/Signin/Signin';
@@ -18,7 +19,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/services' element={<Services/>}/>
-        <Route path='/blogs' element={<RequireAuth><Blogs/></RequireAuth>}/>
+        <Route path='/services/:serviceId' element={<RequireAuth><ServiceDetails/></RequireAuth>}/>
+        <Route path='/blogs' element={<Blogs/>}/>
         <Route path='/about' element={<RequireAuth><About/></RequireAuth>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/signup' element={<Signup/>}/>

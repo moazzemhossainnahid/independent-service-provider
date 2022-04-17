@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Signup.css";
 
 import google from '../../images/Google-Logo.png';
 import github from '../../images/Github-Icon.png';
+import useFirebase from "../components/useFirebase";
 
 const Signup = () => {
+  const {handleSignUpForm, handleEmailInput, handlePasswordInput, handleConfirmPasswordInput, handleGoogleSignIn, handleGithubSignIn} = useFirebase();
+  const [checked, setChecked] = useState(false);
   return (
     <div>
       <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm mx-auto text-left my-5">
-        <form>
+        <form onSubmit={handleSignUpForm}>
           <div className="form-group mb-6">
             <label
               for="exampleInputEmail2"
@@ -19,21 +22,23 @@ const Signup = () => {
             </label>
             <input
               type="email"
+              required
+              onBlur={handleEmailInput}
               className="form-control
-        block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              block
+              w-full
+              px-3
+              py-1.5
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="exampleInputEmail2"
               aria-describedby="emailHelp"
               placeholder="Enter email"
@@ -48,13 +53,15 @@ const Signup = () => {
             </label>
             <input
               type="password"
+              required
+              onBlur={handlePasswordInput}
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="exampleInputPassword2"
               placeholder="Password"
             />
@@ -68,19 +75,21 @@ const Signup = () => {
             </label>
             <input
               type="password"
+              required
+              onBlur={handleConfirmPasswordInput}
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="exampleInputPassword3"
               placeholder="Confirm Password"
             />
           </div>
           <div className="flex justify-between items-center mb-6">
-            <div className="form-group form-check">
+            <div onClick={() => setChecked(!checked)} className="form-group form-check">
               <input
                 type="checkbox"
                 className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
@@ -90,7 +99,7 @@ const Signup = () => {
                 className="form-check-label inline-block text-gray-800"
                 for="exampleCheck2"
               >
-                Remember me
+                Accept Turms & Consitions
               </label>
             </div>
             <a
@@ -101,25 +110,26 @@ const Signup = () => {
             </a>
           </div>
           <button
+          disabled
             type="submit"
             className="
-      w-full
-      px-6
-      py-2.5
-      bg-blue-600
-      text-white
-      font-medium
-      text-xs
-      leading-tight
-      uppercase
-      rounded
-      shadow-md
-      hover:bg-blue-700 hover:shadow-lg
-      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-      active:bg-blue-800 active:shadow-lg
-      transition
-      duration-150
-      ease-in-out"
+            w-full
+            px-6
+            py-2.5
+            bg-blue-600
+            text-white
+            font-medium
+            text-xs
+            leading-tight
+            uppercase
+            rounded
+            shadow-md
+            hover:bg-blue-700 hover:shadow-lg
+            focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+            active:bg-blue-800 active:shadow-lg
+            transition
+            duration-150
+            ease-in-out"
           >
             Sign Up
           </button>
@@ -139,11 +149,11 @@ const Signup = () => {
           <div className="line"></div>
         </div>
         <div className="social">
-            <div className="flex items-center justify-center border rounded py-2 my-2 cursor-pointer hover:bg-gray-300">
+            <div onClick={handleGoogleSignIn} className="flex items-center justify-center border rounded py-2 my-2 cursor-pointer hover:bg-gray-300">
                 <img className="w-6" src={google} alt="" />
                 <span className="pl-2">Continue With Google</span>
             </div>
-            <div className="flex items-center justify-center border rounded py-2 my-2 cursor-pointer hover:bg-gray-300">
+            <div onClick={handleGithubSignIn} className="flex items-center justify-center border rounded py-2 my-2 cursor-pointer hover:bg-gray-300">
                 <img className="w-6" src={github} alt="" />
                 <span className="pl-2">Continue With Github</span>
             </div>

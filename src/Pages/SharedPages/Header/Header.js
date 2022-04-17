@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import './Header.css';
 import Globe from '@iconscout/react-unicons/icons/uil-globe';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 
 import Bar from '@iconscout/react-unicons/icons/uil-bars';
 import Close from '@iconscout/react-unicons/icons/uil-arrow-down-left';
+import useFirebase from '../../components/useFirebase';
  
 const Header = () => {
+    const {user, handleSignOut} = useFirebase();
     const navigate = useNavigate();
 
     let Links = [
         {name: 'HOME', to:'/'},
         {name: 'SERVICES', to:'/services'},
         {name: 'BLOGS', to:'/blogs'},
-        {name: 'CONTACT', to:'/contact'},
         {name: 'ABOUT', to:'/about'},
+        {name: 'CONTACT', to:'/contact'}
     ];
 
     let [open, setOpen] = useState(false);
@@ -34,10 +36,12 @@ const Header = () => {
                 <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 opacity-100' : 'top-[-490px] opacity-0 md:opacity-100'}`}>
                     {
                         Links.map(link => (
-                            <li key={link.name} className='md:ml-8 text-xl md:my-0 my-7'><Link className='text-gray-800 hover:text-gray-500 duration-300' to={link.to}>{link.name}</Link></li>
+                            <li key={link.name} className='md:ml-8 text-xl md:my-0 my-7'><NavLink className={({ isActive }) => (isActive ? 'text-red-500 duration-300 border-b-2 border-cyan-500' : 'text-gray-800 duration-100')} to={link.to}>{link.name}</NavLink></li>
                         ))
                     }
-                    <div className="" onClick={() => navigate('/signin')}><Button>SignIn</Button></div>
+                    {
+                        user ? <div className="" onClick={handleSignOut}><Button>SignOut</Button></div> : <div className="" onClick={() => navigate('/signin')}><Button>SignIn</Button></div>
+                    }
                     
                 </ul>
             </div>

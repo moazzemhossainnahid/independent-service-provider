@@ -4,14 +4,16 @@ import './Signin.css';
 
 import google from '../../images/Google-Logo.png';
 import github from '../../images/Github-Icon.png';
+import useFirebase from '../components/useFirebase';
 
 const Signin = () => {
+  const {handleEmailInput, handlePasswordInput, handleSignInForm, handleGoogleSignIn, handleGithubSignIn} = useFirebase();
     return (
         <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm mx-auto text-left my-5">
-  <form>
+  <form onSubmit={handleSignInForm}>
     <div className="form-group mb-6">
       <label for="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Email address</label>
-      <input type="email" className="form-control
+      <input type="email" onBlur={handleEmailInput} required className="form-control
         block
         w-full
         px-3
@@ -30,7 +32,7 @@ const Signin = () => {
     </div>
     <div className="form-group mb-6">
       <label for="exampleInputPassword2" className="form-label inline-block mb-2 text-gray-700">Password</label>
-      <input type="password" className="form-control block
+      <input type="password" onBlur={handlePasswordInput} required className="form-control block
         w-full
         px-3
         py-1.5
@@ -51,7 +53,7 @@ const Signin = () => {
         <input type="checkbox"
           className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
           id="exampleCheck2"/>
-        <label className="form-check-label inline-block text-gray-800" for="exampleCheck2">Remember me</label>
+        <label className="form-check-label inline-block text-gray-800" for="exampleCheck2">Accept Turms & Consitions</label>
       </div>
       <a href="#!"
         className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Forgot
@@ -85,11 +87,11 @@ const Signin = () => {
       <div className="line"></div>
   </div>
   <div className="social">
-            <div className="flex items-center justify-center border rounded py-2 my-2 cursor-pointer hover:bg-gray-300">
+            <div onClick={handleGoogleSignIn} className="flex items-center justify-center border rounded py-2 my-2 cursor-pointer hover:bg-gray-300">
                 <img className="w-6" src={google} alt="" />
                 <span className="pl-2">Continue With Google</span>
             </div>
-            <div className="flex items-center justify-center border rounded py-2 my-2 cursor-pointer hover:bg-gray-300">
+            <div onClick={handleGithubSignIn} className="flex items-center justify-center border rounded py-2 my-2 cursor-pointer hover:bg-gray-300">
                 <img className="w-6" src={github} alt="" />
                 <span className="pl-2">Continue With Github</span>
             </div>

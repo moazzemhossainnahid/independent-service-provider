@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from '../components/Slider';
 import ThreeService from '../Services/ThreeService/ThreeService';
+import CityTravel from './CityTravel';
 import './Home.css';
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
         <div>
             <Slider/>
             <ThreeService/>
+            <CityTravel/>
         </div>
     );
 };

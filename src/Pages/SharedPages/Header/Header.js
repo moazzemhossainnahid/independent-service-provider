@@ -24,7 +24,7 @@ const Header = () => {
     return (
         <nav className='shadow-md w-full fixed top-0 left-0 text-left z-[99]'>
             <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
-                <div className="font-bold text-3xl cursor-pointer flex items-center text-red-700">
+                <div onClick={() => {navigate('/')}} className="font-bold text-3xl cursor-pointer flex items-center text-red-700">
                     <span className="px-2 md:px-1"><Globe size='2rem'/></span>
                     City Travel
                 </div>

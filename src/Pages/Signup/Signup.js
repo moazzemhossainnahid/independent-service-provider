@@ -16,7 +16,8 @@ const Signup = () => {
     handleGithubSignIn,
     error,
     emailError,
-    passError
+    passError,
+    conPassError
   } = useFirebase();
   const [checked, setChecked] = useState(false);
   return (
@@ -99,6 +100,7 @@ const Signup = () => {
               id="exampleInputPassword3"
               placeholder="Confirm Password"
             />
+            <p className="text-red-500">{conPassError}</p>
           </div>
           <div className="flex justify-between items-center mb-6">
             <div

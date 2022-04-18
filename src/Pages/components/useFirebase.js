@@ -12,6 +12,7 @@ const [confirmPassword, setConfirmPassword] = useState('');
 const [emailError, setEmailError] = useState('');
 const [passError, setPassError] = useState('');
 const [conPassError, setConPassError] = useState('');
+const mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
 
 const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
 const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
@@ -39,14 +40,17 @@ const handleConfirmPasswordInput = (event) => {
 
 const handleSignUpForm = (event) => {
     event.preventDefault();
+
+
     if(password !== confirmPassword){
-        setPassError('Password & Confirm Password Not Matched!')
+        setConPassError('Password & Confirm Password Not Matched!')
         return;
-    }
-    if( email === ''){
-        setEmailError('Please Enter a Valid Email');
-    }else if(!/\S+@\S+\.\S+/.test(email.value)){
-        setEmailError('Enter Valid Email');
+    }if(password.length < 8){
+        setPassError('Password must be at least 8 Charecters')
+        return;
+    }else{
+        setPassError("");
+        setConPassError("");
     }
     createUserWithEmailAndPassword(email, password)
     .then( () => {

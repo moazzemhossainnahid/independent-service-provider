@@ -15,6 +15,7 @@ const Signup = () => {
     handleGoogleSignIn,
     handleGithubSignIn,
     error,
+    errorElement,
     emailError,
     passError,
     conPassError
@@ -176,6 +177,7 @@ const Signup = () => {
               Sign In
             </Link>
           </p>
+          <p className="text-red-500">{errorElement}</p>
         </form>
         <div className="flex items-center py-2">
           <div className="line"></div>

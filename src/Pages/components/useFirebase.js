@@ -12,7 +12,7 @@ const [confirmPassword, setConfirmPassword] = useState('');
 const [emailError, setEmailError] = useState('');
 const [passError, setPassError] = useState('');
 const [conPassError, setConPassError] = useState('');
-const mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+const [errorElement, setErrorElement] = useState('');
 
 const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
 const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
@@ -52,6 +52,11 @@ const handleSignUpForm = (event) => {
         setPassError("");
         setConPassError("");
     }
+
+    if(error){
+        setErrorElement(error.message);
+    }
+
     createUserWithEmailAndPassword(email, password)
     .then( () => {
         navigate(from, {replace:true})

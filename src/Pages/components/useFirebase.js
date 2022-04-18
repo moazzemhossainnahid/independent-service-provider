@@ -9,10 +9,13 @@ const useFirebase = () => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [confirmPassword, setConfirmPassword] = useState('');
+const [emailError, setEmailError] = useState('');
+const [passError, setPassError] = useState('');
+const [conPassError, setConPassError] = useState('');
 
 const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
 const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-const [signInWithGoogle] = useSignInWithGoogle(auth);
+const [signInWithGoogle, error] = useSignInWithGoogle(auth);
 const [signInWithGithub] = useSignInWithGithub(auth);
 const [user, loading] = useAuthState(auth);
 const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
@@ -37,7 +40,13 @@ const handleConfirmPasswordInput = (event) => {
 const handleSignUpForm = (event) => {
     event.preventDefault();
     if(password !== confirmPassword){
+        setPassError('Password & Confirm Password Not Matched!')
         return;
+    }
+    if( email === ''){
+        setEmailError('Please Enter a Valid Email');
+    }else if(!/\S+@\S+\.\S+/.test(email.value)){
+        setEmailError('Enter Valid Email');
     }
     createUserWithEmailAndPassword(email, password)
     .then( () => {
@@ -83,6 +92,10 @@ const handlePasswordReset = async () => {
     return {
         user,
         loading,
+        error,
+        emailError,
+        passError,
+        conPassError,
         handleEmailInput,
         handlePasswordInput,
         handleConfirmPasswordInput,

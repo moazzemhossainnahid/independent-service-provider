@@ -41,7 +41,7 @@ const Blogs = () => {
             aria-labelledby="headingOne"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body py-4 px-5">
+            <div className="accordion-body bg-indigo-100 py-4 px-5">
               <div className="grid grid-cols-1 md:grid-cols-2">
                   <div className="">
                       <strong className="">Authentication</strong> <br /> <br />
@@ -104,7 +104,7 @@ const Blogs = () => {
             aria-labelledby="headingTwo"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body py-4 px-5">
+            <div className="accordion-body bg-indigo-100 py-4 px-5">
               <strong>Why we Use Firebase</strong> <br /> <br />
               Firebase Authentication provides backend services, easy-to-use SDKs, and ready-made UI libraries to authenticate users to your app. It supports authentication using passwords, phone numbers, popular federated identity providers like Google, Facebook and Twitter, and more. <br /> <br />
               <strong>What other options do you have to implement authentication?</strong> <br /> <br />
@@ -149,7 +149,7 @@ const Blogs = () => {
             aria-labelledby="headingThree"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body py-4 px-5">
+            <div className="accordion-body bg-indigo-100 py-4 px-5">
               <strong>What other services does firebase provide other than authentication.</strong> <br /> <br />
 
               Firebase Provide many more feature without authentication. Firebase Provide Hosting, Realtime Database, Remote Config, Firebase ML, Cloud Function, Cloud Messaging, Could Storage etc. Firebase is a Product of Google LLC. its too much sequre of Other Authetication System.
